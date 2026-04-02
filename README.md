@@ -1,4 +1,4 @@
-# Running Key Cipher with Polynomial Rolling Hash
+# Running Key Cipher with custom Hash
 
 ## Theory
 
@@ -22,25 +22,22 @@ Where:
 
 ---
 
-### Polynomial Rolling Hash
+### Custom XOR + Bit Rotation Hash
 
-This project uses a custom Polynomial Rolling Hash function.
+This project uses a custom hashing algorithm based on:
+- XOR operations
+- Bitwise left rotation
+- Prime-number multiplication
 
-Formula:
-
-Hash(s) = Σ (s[i] × p^i) mod m
-
-Where:
-- p = 31
-- m = 1,000,000,007
+Working:
+1. Each character is XORed with the current hash value.
+2. The bits are rotated left by 5 positions.
+3. The hash is multiplied by 31, to reduce collision
 
 Advantages:
 - Fast computation
-- Simple implementation
-- Good distribution of values
-- Different from common hashes like MD5/SHA used by other students
+- Good avalanche behavior for small inputs
 
----
 
 ## Files
 
@@ -78,7 +75,7 @@ Ciphertext:
 EQNVZTATVO
 
 Hash Output:
-867530912
+0x44c0f1e7
 
 Decrypted Text:
 HELLOWORLD
@@ -97,17 +94,15 @@ Ciphertext:
 UVAGNXTVETLC
 
 Hash Output:
-428913572
+0x8f31c92a
 
 Decrypted Text:
 CRYPTOGRAPHY
-
----
 
 ## Conclusion
 
 This project demonstrates the folliwng
 1. Running Key Cipher encryption
 2. Running Key Cipher decryption
-3. Custom Polynomial Rolling Hash implementation
-4. Complete encrypt → hash → decrypt workflow
+3. Custom Hash implementation
+4. Complete encrypt → hash → decrypt
